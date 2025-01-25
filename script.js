@@ -1,51 +1,66 @@
-let gameItem = ["rock","paper","scissors"];
+let gameItem = ["paper", "rock", "scissors"];
 let playerScore = 0;
-let computerScore =0;
+let computerScore = 0;
 let gameRound = 0;
-const checkWinner = (userInput,computer) =>{
-    if(userInput===computer){
-        return "draw"
-    }else if(userInput==="rock"){
-        return computer==="scissors"?"player":"computer";
-    }else if(userInput==="paper"){
-        return computer==="scissors"?"computer":"player";
-    }else{
-        return computer==="paper"?"player":"computer";
+
+const parent = document.querySelectorAll("#parent > div");
+let pick;
+
+parent.forEach((element, index) => {
+    element.addEventListener("click", () => {
+        pick = gameItem[index];
+        play();
+    });
+});
+
+const checkWinner = (userInput, computer) => {
+    if (userInput === computer) {
+        return "draw";
+    } else if (userInput === "rock") {
+        return computer === "scissors" ? "player" : "computer";
+    } else if (userInput === "paper") {
+        return computer === "scissors" ? "computer" : "player";
+    } else {
+        return computer === "paper" ? "player" : "computer";
     }
 };
-const showResult = (result)=>{
-    if(result ==="player"){
-        console.log("you win");
+
+const showResult = (result) => {
+    if (result === "player") {
+        document.querySelector(".resultEachRound").innerHTML ="You win this round!";
         playerScore++;
-    }else if(result==="computer"){
-        console.log("you lose");
+    } else if (result === "computer") {
+        document.querySelector(".resultEachRound").innerHTML ="You lose this round.";
         computerScore++;
-    }else(
-        console.log("both win")
-    )
-    console.log(`your score is ${playerScore} and computer score is ${computerScore}`);
+    } else {
+        document.querySelector(".resultEachRound").innerHTML ="It's a draw!";
+    }
+    console.log(`Your score: ${playerScore} | Computer score: ${computerScore}`);
     console.log("------------------------");
-}; 
-const play = ()=>{
-    let input = prompt();
-    let gameItem = ["rock","paper","scissors"];
-    let computerChooseIndex = Math.floor(Math.random()*3);
+};
+
+const play = () => {
+    if (gameRound >= 2) {
+        document.querySelector(".resultOfGame").innerHTML=playerScore > computerScore ? "You win the game!" : "Computer wins the game!";
+        return;
+    }
+
+    if (!pick) {
+
+        console.log("Please select an option to play!");
+        return;
+    }
+
+    let computerChooseIndex = Math.floor(Math.random() * 3);
     let computerChoose = gameItem[computerChooseIndex];
-    if( typeof input==="string" && gameItem.includes(input.toLowerCase())){
-        console.log(`you choose ${input}`);
-        console.log(`computer choose ${computerChoose}`);
-        const gameResult = checkWinner(input,computerChoose);
-        showResult(gameResult);
-    }else{
-        console.log("you cheated");
-    };
-}
-while(gameRound<3){
-    play();
+
+    document.querySelector(".choosen").innerHTML = `You chose ${pick} and Computer chose ${computerChoose}`;
+    
+    const gameResult = checkWinner(pick, computerChoose);
+    showResult(gameResult);
+
     gameRound++;
-}
-console.log(playerScore>computerScore?"you win":"computer win");
-
-
-
-
+    if (gameRound === 2) {
+        console.log(playerScore > computerScore ? "You win the game!" : "Computer wins the game!");
+    }
+};
