@@ -1,0 +1,60 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+body {
+    background-color: #d5e1df;
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    height: 100vh; 
+    flex-direction: column;
+}
+.pick-images {
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    background-color: #b5e7a0;
+    padding: 20px; 
+    border-radius: 10px; 
+    
+}
+.pick-images > div {
+    background-color: #f1f1f1;
+    width: 70px;
+    height: 95px;
+    margin: 10px; 
+    text-align: center; 
+    line-height: 75px; 
+    font-size: 30px;
+    transition: margin 0.3s ease; 
+    border-radius: 15px;
+
+}
+
+.pick-images img {
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+}
+.pick-images div :hover{
+    background: #92a8d1;
+    border-radius: 15px;
+
+}
+h1{
+    border: 5px solid #eca1a6;
+    margin-bottom: 10px;
+    padding: 15px;
+}
+.resultOfGame{
+    margin-top: 30px;
+    background-color: #eca1a6;
+}
+.choosen{
+    margin-top: 10px;
+}
+.explation{
+    margin-bottom: 10px;
+}
